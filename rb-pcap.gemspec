@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'rb-pcap'
-  s.version       = '0.0.1'
+  s.version       = '0.1.0'
   s.date          = '2008-08-02'
   s.summary       = 'Simple libpcap wrapper.'
   s.homepage      = 'http://github.com/dxoigmn/rb-pcap'
