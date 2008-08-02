@@ -4,7 +4,7 @@
 #include <ruby.h>
 #include <rubysig.h>
 #include <pcap.h>
-#include "filter.h"
+#include "rb_pcap_filter.h"
 
 #define DEFAULT_DATALINK  DLT_EN10MB
 #define DEFAULT_SNAPLEN  256

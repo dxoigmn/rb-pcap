@@ -1,4 +1,4 @@
-#include "filter.h"
+#include "rb_pcap_filter.h"
 
 void mark_filter(struct filter_object *filter)
 {

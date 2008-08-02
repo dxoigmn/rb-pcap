@@ -4,7 +4,7 @@
 #include <ruby.h>
 #include <rubysig.h>
 #include <pcap.h>
-#include "capture.h"
+#include "rb_pcap_capture.h"
 
 struct filter_object {
   char                *expr;

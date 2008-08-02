@@ -1,4 +1,4 @@
-#include "capture.h"
+#include "rb_pcap_capture.h"
 
 void closed_capture()
 {
