@@ -22,9 +22,9 @@ VALUE filter_init(int argc, VALUE* argv, VALUE self)
   char *expr;
   int n, optimize, snaplen, linktype;
   bpf_u_int32 netmask;
-
+  
   n = rb_scan_args(argc, argv, "12", &v_expr, &v_optimize, &v_netmask);
-  fprintf(stderr, "scanned args\n");
+  
   /* filter expression */
   Check_Type(v_expr, T_STRING);
   expr = STR2CSTR(v_expr);
@@ -45,7 +45,7 @@ VALUE filter_init(int argc, VALUE* argv, VALUE self)
   }
   
   GetFilter(self, filter);
-  fprintf(stderr, "compilging...\n");
+  
   if (pcap_compile_nopcap(snaplen, linktype, &filter->program, expr, optimize, netmask) == -1) {
     rb_raise(eCaptureError, "pcap_compile_nopcap error");
   }
@@ -55,7 +55,7 @@ VALUE filter_init(int argc, VALUE* argv, VALUE self)
   filter->expr      = strdup(expr);
   filter->optimize  = optimize ? Qtrue : Qfalse;
   filter->netmask   = INT2NUM(ntohl(netmask));
-  fprintf(stderr, "returing self\n");
+  
   return self;
 }
 
