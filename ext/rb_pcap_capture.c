@@ -130,6 +130,8 @@ VALUE capture_open(int argc, VALUE *argv, VALUE class)
     to_ms = DEFAULT_TO_MS;
   }
   
+  char pcap_errbuf[PCAP_ERRBUF_SIZE];
+  
   pcap = pcap_open_live(device, snaplen, promisc, to_ms, pcap_errbuf);
   
   if (pcap == NULL) {
@@ -181,6 +183,7 @@ VALUE capture_open_offline(VALUE class, VALUE fname)
   
   /* open offline */
   Check_SafeStr(fname);
+  char pcap_errbuf[PCAP_ERRBUF_SIZE];
   pcap = pcap_open_offline(RSTRING(fname)->ptr, pcap_errbuf);
   if (pcap == NULL) {
     rb_raise(eCaptureError, "%s", pcap_errbuf);
@@ -329,27 +332,6 @@ VALUE capture_snapshot(VALUE self)
     GetCapture(self, cap);
 
     return INT2NUM(pcap_snapshot(cap->pcap));
-}
-
-VALUE capture_stats(VALUE self)
-{
-    struct capture_object *cap;
-    struct pcap_stat stat;
-    VALUE v_stat;
-
-    GetCapture(self, cap);
-
-  memset(&stat, 0, sizeof(stat));
-
-    if (pcap_stats(cap->pcap, &stat) == -1)
-    return Qnil;
-
-    v_stat = rb_funcall(cCaptureStat, rb_intern("new"), 3,
-            UINT2NUM(stat.ps_recv),
-            UINT2NUM(stat.ps_drop),
-            UINT2NUM(stat.ps_ifdrop));
-
-    return v_stat;
 }
 
 VALUE capture_getlimit(VALUE self)

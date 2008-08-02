@@ -1,9 +1,10 @@
-#ifndef __CAPTURE_H__
-#define __CAPTURE_H__
+#ifndef __RB_PCAP_CAPTURE_H__
+#define __RB_PCAP_CAPTURE_H__
 
 #include <ruby.h>
 #include <rubysig.h>
 #include <pcap.h>
+
 #include "rb_pcap_filter.h"
 
 #define DEFAULT_DATALINK  DLT_EN10MB
@@ -11,12 +12,9 @@
 #define DEFAULT_PROMISC  1
 #define DEFAULT_TO_MS  1000
 
-static char pcap_errbuf[PCAP_ERRBUF_SIZE];
-
-static VALUE eCaptureError;
-static VALUE eTruncatedPacket;
-static VALUE cCapture;
-static VALUE cCaptureStat;
+extern VALUE eCaptureError;
+extern VALUE eTruncatedPacket;
+extern VALUE cCapture;
 
 struct capture_object {
   pcap_t        *pcap;
@@ -48,7 +46,6 @@ VALUE capture_dispatch(int argc, VALUE *argv, VALUE self);
 VALUE capture_loop(int argc, VALUE *argv, VALUE self);
 VALUE capture_datalink(VALUE self);
 VALUE capture_snapshot(VALUE self);
-VALUE capture_stats(VALUE self);
 VALUE capture_getlimit(VALUE self);
 VALUE capture_setlimit(VALUE self, VALUE limit);
 VALUE capture_getdissector(VALUE self);

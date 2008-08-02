@@ -1,10 +1,7 @@
-#include "rb_pcap_capture.h"
-#include "rb_pcap_filter.h"
+#include "rb_pcap.h"
 
 void Init_rb_pcap() {
   cCapture = rb_define_class("Capture", rb_cObject);
-  cFilter = rb_define_class_under(cCapture, "Filter", rb_cObject);
-  
   rb_include_module(cCapture, rb_mEnumerable); 
   rb_define_singleton_method(cCapture, "open", capture_open, -1);
   rb_define_singleton_method(cCapture, "open_offline", capture_open_offline, 1);
@@ -19,15 +16,13 @@ void Init_rb_pcap() {
   rb_define_method(cCapture, "dissector=", capture_setdissector, 0);
   rb_define_method(cCapture, "datalink", capture_datalink, 0);
   rb_define_method(cCapture, "snapshot_length", capture_snapshot, 0);
-  rb_define_method(cCapture, "stats", capture_stats, 0);
   
-  rb_define_singleton_method(cFilter, "new", filter_new, -1);
+  cFilter = rb_define_class_under(cCapture, "Filter", rb_cObject);
+  rb_define_alloc_func(cFilter, filter_alloc);
+  rb_define_method(cFilter, "initialize", filter_init, -1);
   rb_define_method(cFilter, "expression", filter_source, 0);
   rb_define_method(cFilter, "=~", filter_match, 1);
   rb_define_method(cFilter, "===", filter_match, 1);
-  
-  cCaptureStat = rb_funcall(rb_cStruct, rb_intern("new"), 4, Qnil, ID2SYM(rb_intern("4")), ID2SYM(rb_intern("drop")), ID2SYM(rb_intern("ifdrop")));
-  rb_define_const(cCapture, "Stat", cCaptureStat);
   
   eCaptureError    = rb_define_class_under(cCapture, "CaptureError", rb_eStandardError);
   eTruncatedPacket = rb_define_class_under(cCapture, "TruncatedPacket", eCaptureError);
