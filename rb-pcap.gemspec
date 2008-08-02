@@ -5,7 +5,8 @@ Gem::Specification.new do |s|
   s.summary       = 'Simple libpcap wrapper.'
   s.homepage      = 'http://github.com/dxoigmn/rb-pcap'
   s.description   = 'A simple libpcap wrapper.'
-  s.files         = [ 'lib/rb-pcap.rb',
+  s.files         = [ 'README.markdown',
+                      'lib/rb-pcap.rb',
                       'ext/extconf.rb',
                       'ext/rb_pcap_capture.c',
                       'ext/rb_pcap_capture.h',
