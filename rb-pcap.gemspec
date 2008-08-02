@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
                       'ext/rb_pcap_capture.h',
                       'ext/rb_pcap_filter.c',
                       'ext/rb_pcap_filter.h',
-                      'ext/rb_pcap.c' ]
+                      'ext/rb_pcap.c',
+                      'ext/rb_pcap.h' ]
   s.require_paths = [ 'lib' ]
   s.extensions    = [ 'ext/extconf.rb' ]
 end
