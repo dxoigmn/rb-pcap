@@ -1,10 +1,12 @@
 Gem::Specification.new do |s|
+  s.authors       = ['Cory T. Cornelius']
+  s.email         = ['cory.t.cornelius@dartmouth.edu']
   s.name          = 'rb-pcap'
   s.version       = '0.1.0'
   s.date          = '2008-08-02'
   s.summary       = 'Simple libpcap wrapper.'
   s.homepage      = 'http://github.com/dxoigmn/rb-pcap'
-  s.description   = 'A simple libpcap wrapper.'
+  s.description   = 'See README.markdown for more information.'
   s.files         = [ 'README.markdown',
                       'lib/rb-pcap.rb',
                       'ext/extconf.rb',
